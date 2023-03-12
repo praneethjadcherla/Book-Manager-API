@@ -109,4 +109,9 @@ public class BookManagerControllerTests {
         verify(mockBookManagerServiceImpl, times(1)).updateBookById(book.getId(), book);
     }
 
+    /*@Test
+    public void testDeleteMappingDeleteBookById(){
+        when
+    }*/
+
 }

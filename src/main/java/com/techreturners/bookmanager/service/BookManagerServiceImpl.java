@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookManagerServiceImpl implements BookManagerService {
@@ -42,6 +43,11 @@ public class BookManagerServiceImpl implements BookManagerService {
         retrievedBook.setGenre(book.getGenre());
 
         bookManagerRepository.save(retrievedBook);
+    }
+
+    @Override
+    public void deleteBookById(Long id) {
+        bookManagerRepository.deleteById(id);
     }
 
 }
