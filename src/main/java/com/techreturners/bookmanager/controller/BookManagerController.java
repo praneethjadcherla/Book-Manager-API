@@ -24,8 +24,12 @@ public class BookManagerController {
     }
 
     @GetMapping({"/{bookId}"})
-    public ResponseEntity<Book> getBookById(@PathVariable Long bookId) {
-        return new ResponseEntity<>(bookManagerService.getBookById(bookId), HttpStatus.OK);
+    public ResponseEntity<Book> getBookById(@PathVariable Long bookId) throws Exception {
+        Book retrievebook=bookManagerService.getBookById(bookId);
+        if(retrievebook==null){
+            throw new Exception("There is no book present with the provided Id");
+        }
+        return new ResponseEntity<>(retrievebook, HttpStatus.OK);
     }
 
     @PostMapping
