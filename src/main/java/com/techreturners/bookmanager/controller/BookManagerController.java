@@ -29,7 +29,12 @@ public class BookManagerController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+    public ResponseEntity<Book> addBook(@RequestBody Book book) throws Exception {
+        Book bookexist = bookManagerService.getBookById(book.getId());
+        if (bookexist != null) {
+            throw new Exception("There is already a book with the given ID.. Please try with another ID");
+        }
+
         Book newBook = bookManagerService.insertBook(book);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("book", "/api/v1/book/" + newBook.getId().toString());
