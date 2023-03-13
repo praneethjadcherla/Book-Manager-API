@@ -114,11 +114,15 @@ public class BookManagerControllerTests {
     public void testDeleteMappingDeleteBookById() throws Exception {
         Book book = new Book(4L, "Book Four", "This is the description for Book Four", "Person Four", Genre.Fantasy);
 
+        when(mockBookManagerServiceImpl.getBookById(book.getId())).thenReturn(book);
+
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.delete("/api/v1/book/"+book.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(book)))
                         .andExpect(MockMvcResultMatchers.status().isOk());
 
+        verify(mockBookManagerServiceImpl, times(1)).deleteBookById(book.getId());
 
     }
 
