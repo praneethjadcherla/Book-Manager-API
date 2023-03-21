@@ -125,5 +125,4 @@ public class BookManagerControllerTests {
         verify(mockBookManagerServiceImpl, times(1)).deleteBookById(book.getId());
 
     }
-
 }
